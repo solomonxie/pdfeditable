@@ -1,0 +1,663 @@
+{
+	"info": {
+		"name": "百度OCR API",
+		"_postman_id": "f58a3225-3621-1a9e-69cf-b85c6a786393",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id={{client_id}}&client_secret={{client_secret}}",
+					"protocol": "https",
+					"host": [
+						"aip",
+						"baidubce",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"2.0",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"equals": true
+						},
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"equals": true,
+							"description": "API Key"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"equals": true,
+							"description": "Secret Key"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "OCR_test",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4b97d539-875f-44df-9067-26e5351e2399",
+						"type": "text/javascript",
+						"exec": [
+							"var b64 = CryptoJS.enc.Base64.parse(\"hello\");",
+							"",
+							"console.log(b64)"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "{{url}}",
+							"description": "和image二选一. \n图片完整URL，URL长度不超过1024字节，URL对应的图片base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效，不支持https的图片链接",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "image",
+							"value": "{{image}}",
+							"description": "和url二选一\n图像数据，base64编码后进行urlencode，要求base64编码和urlencode后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效",
+							"type": "text"
+						},
+						{
+							"key": "language_type",
+							"value": "CHN_ENG",
+							"description": "识别语言类型，默认为CHN_ENG。可选值包括：\n- CHN_ENG：中英文混合；\n- ENG：英文；\n- POR：葡萄牙语；\n- FRE：法语；\n- GER：德语；\n- ITA：意大利语；\n- SPA：西班牙语；\n- RUS：俄语；\n- JAP：日语；\n- KOR：韩语",
+							"type": "text"
+						},
+						{
+							"key": "detect_direction",
+							"value": "true",
+							"description": "是否检测图像朝向，默认不检测，即：false。朝向是指输入图像是正常方向、逆时针旋转90/180/270度。可选值包括:\n- true：检测朝向；\n- false：不检测朝向。",
+							"type": "text"
+						},
+						{
+							"key": "probability",
+							"value": "true",
+							"description": "是否返回识别结果中每一行的置信度",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic",
+					"protocol": "https",
+					"host": [
+						"aip",
+						"baidubce",
+						"com"
+					],
+					"path": [
+						"rest",
+						"2.0",
+						"ocr",
+						"v1",
+						"general_basic"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "OCR_general_basic",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "{{image}}",
+							"description": "和url二选一\n图像数据，base64编码后进行urlencode，要求base64编码和urlencode后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "{{url}}",
+							"description": "和image二选一. \n图片完整URL，URL长度不超过1024字节，URL对应的图片base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效，不支持https的图片链接",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "language_type",
+							"value": "CHN_ENG",
+							"description": "识别语言类型，默认为CHN_ENG。可选值包括：\n- CHN_ENG：中英文混合；\n- ENG：英文；\n- POR：葡萄牙语；\n- FRE：法语；\n- GER：德语；\n- ITA：意大利语；\n- SPA：西班牙语；\n- RUS：俄语；\n- JAP：日语；\n- KOR：韩语",
+							"type": "text"
+						},
+						{
+							"key": "detect_direction",
+							"value": "true",
+							"description": "是否检测图像朝向，默认不检测，即：false。朝向是指输入图像是正常方向、逆时针旋转90/180/270度。可选值包括:\n- true：检测朝向；\n- false：不检测朝向。",
+							"type": "text"
+						},
+						{
+							"key": "probability",
+							"value": "true",
+							"description": "是否返回识别结果中每一行的置信度",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic",
+					"protocol": "https",
+					"host": [
+						"aip",
+						"baidubce",
+						"com"
+					],
+					"path": [
+						"rest",
+						"2.0",
+						"ocr",
+						"v1",
+						"general_basic"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "OCR_ accurate_basic",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "{{image}}",
+							"description": "和url二选一\n图像数据，base64编码后进行urlencode，要求base64编码和urlencode后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "{{url}}",
+							"description": "和image二选一. \n图片完整URL，URL长度不超过1024字节，URL对应的图片base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效，不支持https的图片链接",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "language_type",
+							"value": "CHN_ENG",
+							"description": "识别语言类型，默认为CHN_ENG。可选值包括：\n- CHN_ENG：中英文混合；\n- ENG：英文；\n- POR：葡萄牙语；\n- FRE：法语；\n- GER：德语；\n- ITA：意大利语；\n- SPA：西班牙语；\n- RUS：俄语；\n- JAP：日语；\n- KOR：韩语",
+							"type": "text"
+						},
+						{
+							"key": "detect_direction",
+							"value": "true",
+							"description": "是否检测图像朝向，默认不检测，即：false。朝向是指输入图像是正常方向、逆时针旋转90/180/270度。可选值包括:\n- true：检测朝向；\n- false：不检测朝向。",
+							"type": "text"
+						},
+						{
+							"key": "probability",
+							"value": "true",
+							"description": "是否返回识别结果中每一行的置信度",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic",
+					"protocol": "https",
+					"host": [
+						"aip",
+						"baidubce",
+						"com"
+					],
+					"path": [
+						"rest",
+						"2.0",
+						"ocr",
+						"v1",
+						"accurate_basic"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "OCR_general",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "{{image}}",
+							"description": "和url二选一\n图像数据，base64编码后进行urlencode，要求base64编码和urlencode后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "{{url}}",
+							"description": "和image二选一. \n图片完整URL，URL长度不超过1024字节，URL对应的图片base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效，不支持https的图片链接",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "language_type",
+							"value": "CHN_ENG",
+							"description": "识别语言类型，默认为CHN_ENG。可选值包括：\n- CHN_ENG：中英文混合；\n- ENG：英文；\n- POR：葡萄牙语；\n- FRE：法语；\n- GER：德语；\n- ITA：意大利语；\n- SPA：西班牙语；\n- RUS：俄语；\n- JAP：日语；\n- KOR：韩语",
+							"type": "text"
+						},
+						{
+							"key": "detect_direction",
+							"value": "true",
+							"description": "是否检测图像朝向，默认不检测，即：false。朝向是指输入图像是正常方向、逆时针旋转90/180/270度。可选值包括:\n- true：检测朝向；\n- false：不检测朝向。",
+							"type": "text"
+						},
+						{
+							"key": "probability",
+							"value": "true",
+							"description": "是否返回识别结果中每一行的置信度",
+							"type": "text"
+						},
+						{
+							"key": "recognize_granularity",
+							"value": "true",
+							"description": "big、small\n是否定位单字符位置，\nbig：不定位单字符位置，默认值；\nsmall：定位单字符位置",
+							"type": "text"
+						},
+						{
+							"key": "detect_language",
+							"value": "true",
+							"description": "是否检测语言，默认不检测。当前支持（中文、英语、日语、韩语）",
+							"type": "text"
+						},
+						{
+							"key": "vertexes_location",
+							"value": "true",
+							"description": "是否返回文字外接多边形顶点位置，不支持单字位置。默认为false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://aip.baidubce.com/rest/2.0/ocr/v1/general",
+					"protocol": "https",
+					"host": [
+						"aip",
+						"baidubce",
+						"com"
+					],
+					"path": [
+						"rest",
+						"2.0",
+						"ocr",
+						"v1",
+						"general"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "OCR_accurate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "{{image}}",
+							"description": "和url二选一\n图像数据，base64编码后进行urlencode，要求base64编码和urlencode后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "{{url}}",
+							"description": "和image二选一. \n图片完整URL，URL长度不超过1024字节，URL对应的图片base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效，不支持https的图片链接",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "detect_direction",
+							"value": "true",
+							"description": "是否检测图像朝向，默认不检测，即：false。朝向是指输入图像是正常方向、逆时针旋转90/180/270度。可选值包括:\n- true：检测朝向；\n- false：不检测朝向。",
+							"type": "text"
+						},
+						{
+							"key": "probability",
+							"value": "true",
+							"description": "是否返回识别结果中每一行的置信度",
+							"type": "text"
+						},
+						{
+							"key": "recognize_granularity",
+							"value": "true",
+							"description": "big、small\n是否定位单字符位置，\nbig：不定位单字符位置，默认值；\nsmall：定位单字符位置",
+							"type": "text"
+						},
+						{
+							"key": "vertexes_location",
+							"value": "true",
+							"description": "是否返回文字外接多边形顶点位置，不支持单字位置。默认为false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate",
+					"protocol": "https",
+					"host": [
+						"aip",
+						"baidubce",
+						"com"
+					],
+					"path": [
+						"rest",
+						"2.0",
+						"ocr",
+						"v1",
+						"accurate"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "OCR_webimage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "{{image}}",
+							"description": "和url二选一\n图像数据，base64编码后进行urlencode，要求base64编码和urlencode后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "{{url}}",
+							"description": "和image二选一. \n图片完整URL，URL长度不超过1024字节，URL对应的图片base64编码后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效，不支持https的图片链接",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "detect_direction",
+							"value": "true",
+							"description": "是否检测图像朝向，默认不检测，即：false。朝向是指输入图像是正常方向、逆时针旋转90/180/270度。可选值包括:\n- true：检测朝向；\n- false：不检测朝向。",
+							"type": "text"
+						},
+						{
+							"key": "detect_language",
+							"value": "true",
+							"description": "是否检测语言，默认不检测。当前支持（中文、英语、日语、韩语）",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://aip.baidubce.com/rest/2.0/ocr/v1/webimage",
+					"protocol": "https",
+					"host": [
+						"aip",
+						"baidubce",
+						"com"
+					],
+					"path": [
+						"rest",
+						"2.0",
+						"ocr",
+						"v1",
+						"webimage"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "OCR_id_card",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "{{image}}",
+							"description": "和url二选一\n图像数据，base64编码后进行urlencode，要求base64编码和urlencode后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效",
+							"type": "text"
+						},
+						{
+							"key": "detect_direction",
+							"value": "true",
+							"description": "是否检测图像朝向，默认不检测，即：false。朝向是指输入图像是正常方向、逆时针旋转90/180/270度。可选值包括:\n- true：检测朝向；\n- false：不检测朝向。",
+							"type": "text"
+						},
+						{
+							"key": "id_card_side",
+							"value": "front",
+							"description": "front：身份证含照片的一面；\nback：身份证带国徽的一面",
+							"type": "text"
+						},
+						{
+							"key": "detect_risk",
+							"value": "false",
+							"description": "是否开启身份证风险类型(身份证复印件、临时身份证、身份证翻拍、修改过的身份证)功能，\n默认不开启，即：false。\n可选值:true-开启；false-不开启",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://aip.baidubce.com/rest/2.0/ocr/v1/idcard",
+					"protocol": "https",
+					"host": [
+						"aip",
+						"baidubce",
+						"com"
+					],
+					"path": [
+						"rest",
+						"2.0",
+						"ocr",
+						"v1",
+						"idcard"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "OCR_handwriting",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "{{image}}",
+							"description": "和url二选一\n图像数据，base64编码后进行urlencode，要求base64编码和urlencode后大小不超过4M，最短边至少15px，最长边最大4096px,支持jpg/png/bmp格式，当image字段存在时url字段失效",
+							"type": "text"
+						},
+						{
+							"key": "recognize_granularity",
+							"value": "true",
+							"description": "big、small\n是否定位单字符位置，\nbig：不定位单字符位置，默认值；\nsmall：定位单字符位置",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://aip.baidubce.com/rest/2.0/ocr/v1/handwriting",
+					"protocol": "https",
+					"host": [
+						"aip",
+						"baidubce",
+						"com"
+					],
+					"path": [
+						"rest",
+						"2.0",
+						"ocr",
+						"v1",
+						"handwriting"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "401267a4-a261-4903-8163-ff52c45926db",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "693d40b3-8895-4797-b371-a53cb537ca22",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
